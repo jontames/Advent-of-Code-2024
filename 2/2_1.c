@@ -89,6 +89,7 @@ int	main()
 	int		check;
 	int 	count;
 	int 	num;
+	int		control;
 
 	fd = open("list.txt", O_RDONLY);
 
@@ -128,10 +129,21 @@ int	main()
 		line[k] = 1000;
 		x = 0;
 		check = 0;
+		control = 0;
 		while (line[x + 1] != 1000)
 		{
 			if (line[x] == line[x + 1] - 1 || line[x] == line[x + 1] - 2 || line[x] == line[x + 1] - 3)
 				check = 1;
+			else if (line[x] == line[x + 2] - 1 || line[x] == line[x + 2] - 2 || line[x] == line[x + 2] - 3)
+			{
+				check = 1;
+				control++;
+				if (control == 2)
+				{
+					check = 0;
+					break;
+				}
+			}
 			else
 			{
 				check = 0;
@@ -140,12 +152,23 @@ int	main()
 			x++;
 		}
 		x = 0;
+		control = 0;
 		if (check != 1)
 		{
 			while (line[x + 1] != 1000)
 			{
 				if (line[x] == line[x + 1] + 1 || line[x] == line[x + 1] + 2 || line[x] == line[x + 1] + 3)
 					check = 1;
+				else if (line[x] == line[x + 2] + 1 || line[x] == line[x + 2] + 2 || line[x] == line[x + 2] + 3)
+				{
+					check = 1;
+					control++;
+					if (control == 2)
+					{
+						check = 0;
+						break;
+					}
+				}
 				else
 				{
 					check = 0;
